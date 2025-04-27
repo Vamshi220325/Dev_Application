@@ -1,10 +1,18 @@
 const express=require("express");
 
 const app=express();
-app.use("/solve",(req,res)=>{res.send("solve question here!!");});
-app.use("/webpage",(req,res)=>{res.send("this is your beautiful webpage!!");});
-app.use("/test",(req,res)=>{res.send("test your code here!!");});
-app.use((req,res)=>{res.send("hello from server!!");});
+app.get("/user",(req,res)=>{
+    res.send({firstname:"vamshi",lastname:"yenaganti"})
+});
+
+app.post("/user",(req,res)=>{
+    //data is saved to DB
+    res.send("data successfully saved");
+});
+app.delete("/user",(req,res)=>{
+    //data is deleted from db
+    res.send("data is deleted from db");
+});
 
 
 app.listen(3000,()=>{console.log("server is successfully listening on port 3000")});
