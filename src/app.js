@@ -1,11 +1,18 @@
 const express=require("express");
 
 const app=express();
-app.get("/u(s)?er",(req,res)=>{
-    res.send({firstname:"vamshi",lastname:"yenaganti"})
+const {userAuth}=require("./middlewares/auth");
+app.get("/admin/login",(req,res)=>{
+    res.send("succesfully logged");
+})
+app.use("/admin",userAuth);
+app.get("/admin/getData",(req,res,next)=>
+{
+    res.send("data is send!!");
 });
+app.get("/admin/editData",(req,res,next)=>
+    {
+        res.send("Edited data successfully!!");
+    });
 
-
-
-
-app.listen(3000,()=>{console.log("server is successfully listening on port 3000")});
+app.listen(3000,()=>{console.log("server is successfully listening on port 3000!!")});
