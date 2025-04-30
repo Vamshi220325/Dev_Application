@@ -2,16 +2,24 @@ const express=require("express");
 const connectDB=require("./config/database");
 const app=express();
 const User=require("./models/user");
-app.post("/signup",async (req,res)=>{
-    const user=new User({
-        firstName:"dhoni",
-        lastName:"mahendra singh",
-        emailId:"mahi@gmail.com",
-        password:"mahi777"
-    });
-    await user.save();
-    res.send("user added succesfully");
+app.use(express.json());
+app.post("/pushUser",async (req,res)=>{
+    const user=new User(req.body);
+    try{
+        await user.save();
+        res.send(" user added");
+    }
+    catch(err)
+    {
+        res.status(404).send("something went wrong");
+    }
+ 
 });
+
+
+
+
+// })
 
 // app.listen(3000,()=>{console.log("server is successfully listening on port 3000!!")});
 
