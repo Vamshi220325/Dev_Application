@@ -1,4 +1,8 @@
 const validator=require("validator");
+// const User=require("../models/user");
+const {userAuth}=require("../middlewares/auth");
+const mongoose=require("mongoose");
+const bcrypt=require("bcrypt");
 const validateSignUpData=(req)=>{
 
  const {firstName,lastName,emailId,password}=req.body;
@@ -14,4 +18,11 @@ const validateSignUpData=(req)=>{
  }
 
 };
-module.exports={validateSignUpData,};
+const validateEditProfileData=(req)=>{
+   const allowedEditFiels=["fistName","lastName","age","gender","about","skills"];
+   const isEditAllowed=Object.keys(req.body).every((field)=>allowedEditFiels.includes(field));
+   return isEditAllowed;
+
+}
+
+module.exports={validateSignUpData,validateEditProfileData};

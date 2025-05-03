@@ -4,7 +4,7 @@ const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 
 const userSchema=mongoose.Schema(
-    {
+    {  newPassword:{type:String},
         firstName:
         {type:String,
             required:true,
@@ -29,6 +29,9 @@ const userSchema=mongoose.Schema(
                 if(!["male","female","others"].includes(value))
                 {throw new Error("gender is not valid");}
             }
+        },
+        skills:{
+            type:[]
         }
     },{timestamps:true,});
 
