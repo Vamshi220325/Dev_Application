@@ -7,6 +7,7 @@ const userSchema=mongoose.Schema(
     {  newPassword:{type:String},
         firstName:
         {type:String,
+            ref:"User",
             required:true,
             maxLength:50,
             minLength:4
@@ -39,7 +40,7 @@ const userSchema=mongoose.Schema(
         const user=this;
 
       const token=await jwt.sign({_id:user._id},"DEV@TINDER$7822",{expiresIn:"7d"});
-        console.log(token);
+        
         return token;
 
 
